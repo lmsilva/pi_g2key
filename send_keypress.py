@@ -1,10 +1,19 @@
 #!/usr/bin/python
-from pynput.keyboard import Key, Controller
+from ConfigParser import SafeConfigParser
+from inputs import devices
+from inputs import get_gamepad
+from inputs import get_key
 import time
+import keyboard
 
-keyboard = Controller()
-
+config = SafeConfigParser()
+config.read('gamepad_config.ini')
 while 1:
-	keyboard.press(Key.down)
-	keyboard.release(Key.down)
-	time.sleep(1)
+		
+	events = get_gamepad()
+	for event in events:
+		try:
+			if (config.get('gamepad_mapping', event.code.upper())):
+				keyboard.press_and_release(config.get('gamepad_mapping', event.code.upper()))
+		except:
+			pass
