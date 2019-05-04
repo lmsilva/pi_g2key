@@ -28,12 +28,10 @@ while (1):
 	while (GAMEPAD == None):
 		events = get_gamepad()
 		for event in events:
-			print (event.ev_type, event.code, event.state)
-			if (event.ev_type == 'Key' and event.state == 1 ):
+			#print (event.ev_type, event.code, event.state)
+			if (event.state == 0 and event.ev_type != "Sync"):
 				GAMEPAD = event.code
 				break
-	time.sleep(1)
-	print
 	############## KEYBOARD READ 
 	print "Map to keyboard key..."
 	KEYBOARD = None

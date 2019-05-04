@@ -13,7 +13,7 @@ while 1:
 	events = get_gamepad()
 	for event in events:
 		try:
-			if (config.get('gamepad_mapping', event.code.upper())):
-				keyboard.press_and_release(config.get('gamepad_mapping', event.code.upper()))
+			if (event.state==0):
+				keyboard.send(config.get('gamepad_mapping', event.code.upper()))
 		except:
 			pass
